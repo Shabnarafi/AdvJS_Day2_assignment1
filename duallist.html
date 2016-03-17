@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<style>
+.container{
+	width: 50%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	margin-top: 200px;
+}
+
+</style>
+</head>
+<body>
+<div class="container" id="div1">
+	<table>
+	<tr>
+	<th>Available employees - showing</th>
+	<th></th>
+	<th>Selected Employees-showing</th>
+	</tr>
+	<tr>
+	<td>
+		<form name="form1">
+		<input type="text" id="Filter" placeholder="Filter"/>
+	</td>
+	<td></td>
+	<td><input type="text" id="Filter1" placeholder="Filter"/></td>
+	</tr>
+	<tr>
+	<td>
+		
+		<select name="demoSel" id="demoSel" size="12" multiple>
+			<option value="emp1">John1</option>
+			<option value="emp2">John2</option>
+			<option value="emp3">John3</option>
+			<option value="emp4">John4</option>
+			<option value="emp5">John5</option>
+			<option value="emp6">John6</option>
+			<option value="emp7">John7</option>
+			<option value="emp8">John8</option>
+			<option value="emp9">John9</option>
+			<option value="emp10">John10</option>
+			<option value="emp11">John11</option>
+			<option value="emp12">John12</option>
+			<option value="emp13">John13</option>
+			<option value="emp14">John14</option>
+			<option value="emp15">John15</option>
+			<option value="emp16">John16</option>
+			<option value="emp17">John17</option>
+			<option value="emp18">John18</option>
+			<option value="emp19">John19</option>
+			<option value="emp20">John20</option>
+		</select>
+		
+	</td>
+	<td>
+		<input type="button" id="btn-fwd" value=">" onclick="listbox_moveacross(form1.demoSel.id,form1.demo1.id)"/><br>
+		<input type="button" id="btn-bwd" value="<" onclick="getSelectedOptionsToSrc(form1.demo1.id,form1.demoSel.id)"/>
+	</td>
+	<td>
+		
+		<select name="demo1" id="demo1" size="12" multiple></select>
+			
+		</form>
+	</td>
+	</tr>
+	</table>
+</div>
+			
+	
+
+<script>
+	function listbox_moveacross(sourceID, destID) {
+    var src = document.getElementById(sourceID);
+    var dest = document.getElementById(destID);
+ 
+    for(var count=0; count < src.options.length; count++) {
+		
+        if(src.options[count].selected == true) {
+                var option = src.options[count];
+ 
+                var newOption = document.createElement("option");
+                newOption.value = option.value;
+                newOption.text = option.text;
+                newOption.selected = true;
+                try {
+                         dest.add(newOption, null); //Standard
+                         src.remove(count, null);
+                 }catch(error) {
+                         dest.add(newOption); // IE only
+                         src.remove(count);
+                 }
+                count--;
+				
+        }
+    }
+}
+function getSelectedOptionsToSrc(destID,sourceID){
+	var src = document.getElementById(sourceID);
+    var dest = document.getElementById(destID);
+ 
+    for(var count=0; count < dest.options.length; count++) {
+ 
+        if(dest.options[count].selected == true) {
+                var option = dest.options[count];
+ 
+                var newOption = document.createElement("option");
+                newOption.value = option.value;
+                newOption.text = option.text;
+                newOption.selected = true;
+                try {
+                         src.add(newOption, null); //Standard
+                         dest.remove(count, null);
+                 }catch(error) {
+                         src.add(newOption); // IE only
+                         dest.remove(count);
+                 }
+                count--;
+        }
+    }
+}
+</script>
+</body>
+</html>
